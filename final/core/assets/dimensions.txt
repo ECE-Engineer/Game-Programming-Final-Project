@@ -1,0 +1,53 @@
+100 width and 80
+78 height
+
+bullet -> 28W x 51H
+now total width will be 56W
+
+
+120 width and 100 space invaders1.png 120W 78H
+78 height
+
+
+110 width and 80 space invaders0.png 110W 78H
+78 height
+
+
+logo -> 98W x 58H
+
+
+90 W and 70 and 80
+78H
+
+
+barrier -> 104W x 73H ---52
+
+90W and 70W
+78H
+
+
+
+60H
+
+
+
+explosion ---> 105W
+210W
+60H
+
+alien explosion ---> 90W
+180W
+58H7
+
+
+
+PC-->
+73W
+52H
+
+
+
+UFO-->
+122W
+57H
+
