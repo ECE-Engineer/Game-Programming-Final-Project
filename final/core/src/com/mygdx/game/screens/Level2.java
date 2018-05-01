@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -113,8 +114,8 @@ public class Level2 implements Screen {
         this.wall = new Texture("wall.png");
         this.grass = new Texture("grass.png");
         this.gameWorld = new byte[GAME_WORLD_ROWS][GAME_WORLD_COLUMNS];
-        File file = new File("tileMap2.txt");
-        Scanner scanner = new Scanner(file);
+        FileHandle file = Gdx.files.internal("tileMap2.txt");
+        Scanner scanner = new Scanner(file.readString());
         int counter = 0;
         while (scanner.hasNextLine()) {
             String[] cells = scanner.nextLine().split(" ");
@@ -176,9 +177,9 @@ public class Level2 implements Screen {
         boxBody.createFixture(boxFixture);
 
         //set audio
-        this.theme = Gdx.audio.newMusic(Gdx.files.internal("level2.wav"));
-//        theme.setVolume(0.25f);
-        this.portalSound = Gdx.audio.newSound(Gdx.files.internal("portal2.wav"));
+        this.theme = Gdx.audio.newMusic(Gdx.files.internal("level2.mp3"));
+        theme.setVolume(0.75f);
+        this.portalSound = Gdx.audio.newSound(Gdx.files.internal("portal2.mp3"));
         this.squeak = Gdx.audio.newSound(Gdx.files.internal("squeak.mp3"));
         this.success = Gdx.audio.newSound(Gdx.files.internal("success.mp3"));
 

@@ -113,7 +113,10 @@ public class MainMenuScreen implements Screen {
         this.LOOK_RED = ThreadLocalRandom.current().nextBoolean();
         this.LOOK_GREEN = ThreadLocalRandom.current().nextBoolean();
         this.LOOK_WHITE = ThreadLocalRandom.current().nextBoolean();
-        this.theme = (ThreadLocalRandom.current().nextBoolean()) ? Gdx.audio.newMusic(Gdx.files.internal("theme.wav")) : Gdx.audio.newMusic(Gdx.files.internal("alt_main_screen.mp3"));
+        boolean music = ThreadLocalRandom.current().nextBoolean();
+        this.theme = (music) ? Gdx.audio.newMusic(Gdx.files.internal("theme.mp3")) : Gdx.audio.newMusic(Gdx.files.internal("alt_main_screen.mp3"));
+        float volume = (music) ? 1f : 0.25f;
+        theme.setVolume(volume);
         this.background = new Texture("MainMenuScreen.png");
         this.playButtonActive = new Texture("play_button_active.png");
         this.playButtonInactive = new Texture("play_button_inactive.png");

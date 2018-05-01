@@ -92,7 +92,7 @@ public class PC {
     private final float JUMP_TIMER = 1.75f;
     private final float CATCH_TIMER = 0.3f;
     private final float CATCH_ANIMATION_TIMER = 0.3f;
-//    private final int MOVE_SELECTION = 10;
+    //    private final int MOVE_SELECTION = 10;
     private final float DISPLACEMENT_VALUE = 10f;
 
     private Texture texture;
@@ -134,18 +134,18 @@ public class PC {
 
     public PC(Alex241Intro game, float x, float y, World world) {
         /*
-        * 0 -> left still
-        * 1 -> left right_foot
-        * 2 -> left left_foot
-        * 3 -> right still
-        * 4 -> right right_foot
-        * 5 -> right left_foot
-        *
-        * 6 -> jump
-        * 7 -> malloc
-        * 8 -> free
-        * 9 -> catch
-        * */
+         * 0 -> left still
+         * 1 -> left right_foot
+         * 2 -> left left_foot
+         * 3 -> right still
+         * 4 -> right right_foot
+         * 5 -> right left_foot
+         *
+         * 6 -> jump
+         * 7 -> malloc
+         * 8 -> free
+         * 9 -> catch
+         * */
         this.game = game;
         this.world = world;
         this.x = x;
@@ -186,7 +186,7 @@ public class PC {
         tileFixture.restitution = 0.0f;
         body.createFixture(tileFixture);
 
-        stepSound = Gdx.audio.newSound(Gdx.files.internal("stepSound.wav"));
+        stepSound = Gdx.audio.newSound(Gdx.files.internal("stepSound.mp3"));
         jumpSound = Gdx.audio.newSound(Gdx.files.internal("jump.mp3"));
 
         animationTimer = 0.0f;

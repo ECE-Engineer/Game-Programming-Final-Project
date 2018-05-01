@@ -144,7 +144,7 @@ public class CreditScreen implements Screen {
     }
 
     private void update() {
-        if (positions[10].getY() > Gdx.graphics.getHeight() + allText[10].height) {
+        if (positions[18].getY() > Gdx.graphics.getHeight() + allText[18].height) {
             this.dispose();
             game.setScreen(new MainMenuScreen(game));
         } else {

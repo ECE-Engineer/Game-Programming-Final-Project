@@ -35,6 +35,7 @@ public class GameOverScreen implements Screen {
         this.background = new Texture("rubber_duck.png");
 
         this.theme = Gdx.audio.newMusic(Gdx.files.internal("game_over.mp3"));
+        theme.setVolume(0.1f);
     }
 
     @Override

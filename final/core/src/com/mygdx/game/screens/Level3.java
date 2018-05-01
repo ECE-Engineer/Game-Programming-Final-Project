@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -133,6 +134,7 @@ public class Level3 implements Screen {
     private boolean trapAnimation;
     private boolean exceptionTrapFlag;
     private boolean createTrapException;
+    private boolean youWonFlag;
 
     private int worldExceptionCounter;
     private int stackPiecesToBuild;
@@ -165,8 +167,8 @@ public class Level3 implements Screen {
         this.wall = new Texture("wall.png");
         this.grass = new Texture("grass.png");
         this.gameWorld = new byte[GAME_WORLD_ROWS][GAME_WORLD_COLUMNS];
-        File file = new File("tileMap3.txt");
-        Scanner scanner = new Scanner(file);
+        FileHandle file = Gdx.files.internal("tileMap3.txt");
+        Scanner scanner = new Scanner(file.readString());
         int counter = 0;
         while (scanner.hasNextLine()) {
             String[] cells = scanner.nextLine().split(" ");
@@ -210,9 +212,9 @@ public class Level3 implements Screen {
 
 
         //set audio
-        this.theme = Gdx.audio.newMusic(Gdx.files.internal("final_level.wav"));
-//        theme.setVolume(0.25f);
-        this.portalSound = Gdx.audio.newSound(Gdx.files.internal("portal2.wav"));
+        this.theme = Gdx.audio.newMusic(Gdx.files.internal("final_level.mp3"));
+        theme.setVolume(0.1f);
+        this.portalSound = Gdx.audio.newSound(Gdx.files.internal("portal2.mp3"));
         this.squeak = Gdx.audio.newSound(Gdx.files.internal("squeak.mp3"));
         this.success = Gdx.audio.newSound(Gdx.files.internal("success.mp3"));
 
@@ -266,6 +268,7 @@ public class Level3 implements Screen {
         trapAnimation = false;
         exceptionTrapFlag = false;
         createTrapException = true;
+        youWonFlag = false;
 
         //setup globe
         globePosition = new ArrayList<>();
@@ -309,12 +312,12 @@ public class Level3 implements Screen {
     private void update(float delta) {
         chatBot.think(delta, player.getX(), player.getY());
 
-        if (squeakFlag && squeakOnce) {
+        if (squeakFlag && squeakOnce && !youWonFlag) {
             squeak.play(1f);
             squeakOnce = false;
         }
 
-        if (dieFlag) {
+        if (dieFlag && !youWonFlag) {
             squeakTimer += delta;
             chatBot.setAlive(false);
             chatBot.stopAudio();
@@ -618,6 +621,7 @@ public class Level3 implements Screen {
                 squeakFlag = true;
             }
             if (player.isValidEndState()) {
+                youWonFlag = true;
                 //RUN ANIMATION
                 if (portalSoundComplete) {
                     portalSoundComplete = false;
