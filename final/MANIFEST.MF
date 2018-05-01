@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: com.mygdx.game.desktop.DesktopLauncher
+Implementation-Title: opencensus-contrib-grpc-metrics
+Target-Compatibility: 1.8
+Implementation-Version: 0.10.0
+Built-By: songya
+Source-Compatibility: 1.8
+Built-JDK: 1.8.0_112-google-v7
+
