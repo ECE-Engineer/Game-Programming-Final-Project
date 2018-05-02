@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BinaryTreeBot {
-    private final float BINARY_TREE_LAYERS = 3;
+    private final float BINARY_TREE_LAYERS = 6;
     private final int ROOT_X = 1348;
     private final int ROOT_Y = Gdx.graphics.getHeight() - 196;
     private final float EXCEPTION_SIZE = 16f;

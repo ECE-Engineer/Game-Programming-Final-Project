@@ -1,0 +1,7 @@
+add animation
+add physics
+fix music looping issue
+add sound
+
+ADD OTHER LEVELS AND OTHER BOSSES
+add the collisions for the player and the wall tiles

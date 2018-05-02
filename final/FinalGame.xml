@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Kyle\Desktop\Game-Programming-Final-Project\final\classes\artifacts\final_jar\final.jar</jar>
-  <outfile>C:\Users\Kyle\Desktop\Alex241Intro.exe</outfile>
+  <outfile>C:\Users\Kyle\Documents\Alex241Intro.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
