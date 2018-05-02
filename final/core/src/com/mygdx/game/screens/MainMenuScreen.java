@@ -40,26 +40,28 @@ public class MainMenuScreen implements Screen {
     private final float JUMP_TIMER = 2.0f;
     private final float JUMP_VEL = 25f;
 
-    private final Texture LSG = new Texture("green\\mouse_left_still_64.png");
-    private final Texture LLG = new Texture("green\\mouse_left_left_64.png");
-    private final Texture LRG = new Texture("green\\mouse_left_right_64.png");
-    private final Texture RSG = new Texture("green\\mouse_right_still_64.png");
-    private final Texture RLG = new Texture("green\\mouse_right_left_64.png");
-    private final Texture RRG = new Texture("green\\mouse_right_right_64.png");
 
-    private final Texture LSR = new Texture("red\\mouse_left_red_still_64.png");
-    private final Texture LLR = new Texture("red\\mouse_left_red_left_64.png");
-    private final Texture LRR = new Texture("red\\mouse_left_red_right_64.png");
-    private final Texture RSR = new Texture("red\\mouse_right_red_still_64.png");
-    private final Texture RLR = new Texture("red\\mouse_right_red_left_64.png");
-    private final Texture RRR = new Texture("red\\mouse_right_red_right_64.png");
 
-    private final Texture LSW = new Texture("white\\mouse_left_white_still_64.png");
-    private final Texture LLW = new Texture("white\\mouse_left_white_left_64.png");
-    private final Texture LRW = new Texture("white\\mouse_left_white_right_64.png");
-    private final Texture RSW = new Texture("white\\mouse_right_white_still_64.png");
-    private final Texture RLW = new Texture("white\\mouse_right_white_left_64.png");
-    private final Texture RRW = new Texture("white\\mouse_right_white_right_64.png");
+    private final Texture LSG;
+    private final Texture LLG;
+    private final Texture LRG;
+    private final Texture RSG;
+    private final Texture RLG;
+    private final Texture RRG;
+
+    private final Texture LSR;
+    private final Texture LLR;
+    private final Texture LRR;
+    private final Texture RSR;
+    private final Texture RLR;
+    private final Texture RRR;
+
+    private final Texture LSW;
+    private final Texture LLW;
+    private final Texture LRW;
+    private final Texture RSW;
+    private final Texture RLW;
+    private final Texture RRW;
 
     private float START_GREEN;
     private float START_RED;
@@ -106,10 +108,12 @@ public class MainMenuScreen implements Screen {
     private BodyDef mouseBG;
     private BodyDef mouseBR;
     private BodyDef mouseBW;
+    
+    private String dirSlash;
 
-    public MainMenuScreen(Alex241Intro game) {
+    public MainMenuScreen(Alex241Intro game, String dirSlash) {
         this.game = game;
-
+        this.dirSlash = dirSlash;
         this.LOOK_RED = ThreadLocalRandom.current().nextBoolean();
         this.LOOK_GREEN = ThreadLocalRandom.current().nextBoolean();
         this.LOOK_WHITE = ThreadLocalRandom.current().nextBoolean();
@@ -120,9 +124,29 @@ public class MainMenuScreen implements Screen {
         this.background = new Texture("MainMenuScreen.png");
         this.playButtonActive = new Texture("play_button_active.png");
         this.playButtonInactive = new Texture("play_button_inactive.png");
-        this.gridNumberFont = new BitmapFont(Gdx.files.internal("fonts\\score2.fnt"));
+        this.gridNumberFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score2.fnt"));
         this.movementLabels = new GlyphLayout(gridNumberFont, "A -> Left\nD -> Right\nSpaceBar -> Jump");
         this.abilityLabels = new GlyphLayout(gridNumberFont, "F -> Free\nM -> Malloc\nC -> Catch");
+
+
+        LSG = new Texture("green" + dirSlash + "mouse_left_still_64.png");
+        LLG = new Texture("green" + dirSlash + "mouse_left_left_64.png");
+        LRG = new Texture("green" + dirSlash + "mouse_left_right_64.png");
+        RSG = new Texture("green" + dirSlash + "mouse_right_still_64.png");
+        RLG = new Texture("green" + dirSlash + "mouse_right_left_64.png");
+        RRG = new Texture("green" + dirSlash + "mouse_right_right_64.png");
+        LSR = new Texture("red" + dirSlash + "mouse_left_red_still_64.png");
+        LLR = new Texture("red" + dirSlash + "mouse_left_red_left_64.png");
+        LRR = new Texture("red" + dirSlash + "mouse_left_red_right_64.png");
+        RSR = new Texture("red" + dirSlash + "mouse_right_red_still_64.png");
+        RLR = new Texture("red" + dirSlash + "mouse_right_red_left_64.png");
+        RRR = new Texture("red" + dirSlash + "mouse_right_red_right_64.png");
+        LSW = new Texture("white" + dirSlash + "mouse_left_white_still_64.png");
+        LLW = new Texture("white" + dirSlash + "mouse_left_white_left_64.png");
+        LRW = new Texture("white" + dirSlash + "mouse_left_white_right_64.png");
+        RSW = new Texture("white" + dirSlash + "mouse_right_white_still_64.png");
+        RLW = new Texture("white" + dirSlash + "mouse_right_white_left_64.png");
+        RRW = new Texture("white" + dirSlash + "mouse_right_white_right_64.png");
 
         this.mouseTextureR = (LOOK_RED) ? LSR : RSR;
         this.mouseTextureG = (LOOK_GREEN) ? LSG : RSG;
@@ -574,7 +598,7 @@ public class MainMenuScreen implements Screen {
                 this.dispose();
 
                 try {
-                    game.setScreen(new Level1(game));
+                    game.setScreen(new Level1(game, dirSlash));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

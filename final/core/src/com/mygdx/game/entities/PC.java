@@ -16,26 +16,26 @@ public class PC {
     private final int BLOCK_W = 88;
     private final int BLOCK_H = 64;
 
-    private final Texture LSG = new Texture("green\\mouse_left_still_64.png");
-    private final Texture LLG = new Texture("green\\mouse_left_left_64.png");
-    private final Texture LRG = new Texture("green\\mouse_left_right_64.png");
-    private final Texture RSG = new Texture("green\\mouse_right_still_64.png");
-    private final Texture RLG = new Texture("green\\mouse_right_left_64.png");
-    private final Texture RRG = new Texture("green\\mouse_right_right_64.png");
+    private final Texture LSG;
+    private final Texture LLG;
+    private final Texture LRG;
+    private final Texture RSG;
+    private final Texture RLG;
+    private final Texture RRG;
 
-    private final Texture LSR = new Texture("red\\mouse_left_red_still_64.png");
-    private final Texture LLR = new Texture("red\\mouse_left_red_left_64.png");
-    private final Texture LRR = new Texture("red\\mouse_left_red_right_64.png");
-    private final Texture RSR = new Texture("red\\mouse_right_red_still_64.png");
-    private final Texture RLR = new Texture("red\\mouse_right_red_left_64.png");
-    private final Texture RRR = new Texture("red\\mouse_right_red_right_64.png");
+    private final Texture LSR;
+    private final Texture LLR;
+    private final Texture LRR;
+    private final Texture RSR;
+    private final Texture RLR;
+    private final Texture RRR;
 
-    private final Texture LSW = new Texture("white\\mouse_left_white_still_64.png");
-    private final Texture LLW = new Texture("white\\mouse_left_white_left_64.png");
-    private final Texture LRW = new Texture("white\\mouse_left_white_right_64.png");
-    private final Texture RSW = new Texture("white\\mouse_right_white_still_64.png");
-    private final Texture RLW = new Texture("white\\mouse_right_white_left_64.png");
-    private final Texture RRW = new Texture("white\\mouse_right_white_right_64.png");
+    private final Texture LSW;
+    private final Texture LLW;
+    private final Texture LRW;
+    private final Texture RSW;
+    private final Texture RLW;
+    private final Texture RRW;
 
     private final int ANIMATION_UP_GREEN = 40;
     private final int ANIMATION_SIDE_UP_GREEN = 51;
@@ -53,11 +53,11 @@ public class PC {
         return ANIMATION_SIDE_DOWN_GREEN;
     }
 
-    private final Texture ALLDG = new Texture("animation\\green\\left\\left_left-down_64.png");
-    private final Texture ALLUG = new Texture("animation\\green\\left\\left_left-up_64.png");
-    private final Texture ARRDG = new Texture("animation\\green\\right\\right_right-down_64.png");
-    private final Texture ARRUG = new Texture("animation\\green\\right\\right_right-up_64.png");
-    private final Texture AUG = new Texture("animation\\green\\up_64.png");
+    private final Texture ALLDG;
+    private final Texture ALLUG;
+    private final Texture ARRDG;
+    private final Texture ARRUG;
+    private final Texture AUG;
 
     private final int ANIMATION_UP = 41;
     private final int ANIMATION_SIDE_UP = 51;
@@ -75,17 +75,17 @@ public class PC {
         return ANIMATION_SIDE_DOWN;
     }
 
-    private final Texture ALLDR = new Texture("animation\\red\\left\\left_left-down_64.png");
-    private final Texture ALLUR = new Texture("animation\\red\\left\\left_left-up_64.png");
-    private final Texture ARRDR = new Texture("animation\\red\\right\\right_right-down_64.png");
-    private final Texture ARRUR = new Texture("animation\\red\\right\\right_right-up_64.png");
-    private final Texture AUR = new Texture("animation\\red\\up_64.png");
+    private final Texture ALLDR;
+    private final Texture ALLUR;
+    private final Texture ARRDR;
+    private final Texture ARRUR;
+    private final Texture AUR;
 
-    private final Texture ALLDW = new Texture("animation\\white\\left\\left_left-down_64.png");
-    private final Texture ALLUW = new Texture("animation\\white\\left\\left_left-up_64.png");
-    private final Texture ARRDW = new Texture("animation\\white\\right\\right_right-down_64.png");
-    private final Texture ARRUW = new Texture("animation\\white\\right\\right_right-up_64.png");
-    private final Texture AUW = new Texture("animation\\white\\up_64.png");
+    private final Texture ALLDW;
+    private final Texture ALLUW;
+    private final Texture ARRDW;
+    private final Texture ARRUW;
+    private final Texture AUW;
 
 
     private final float MOVEMENT_TIMER = 0.1f;
@@ -131,8 +131,9 @@ public class PC {
     private final float ANIMATION_TIMER = 1f;
     private float animationTimer;
     private int animationStateCounter;
+    private String dirSlash;
 
-    public PC(Alex241Intro game, float x, float y, World world) {
+    public PC(Alex241Intro game, float x, float y, World world, String dirSlash) {
         /*
          * 0 -> left still
          * 1 -> left right_foot
@@ -147,10 +148,44 @@ public class PC {
          * 9 -> catch
          * */
         this.game = game;
+        this.dirSlash = dirSlash;
         this.world = world;
         this.x = x;
         this.y = y;
         collisionRect = new CollisionRect(this.game, this.x, this.y, this.BLOCK_W, this.BLOCK_H);
+        LSG = new Texture("green" + dirSlash + "mouse_left_still_64.png");
+        LLG = new Texture("green" + dirSlash + "mouse_left_left_64.png");
+        LRG = new Texture("green" + dirSlash + "mouse_left_right_64.png");
+        RSG = new Texture("green" + dirSlash + "mouse_right_still_64.png");
+        RLG = new Texture("green" + dirSlash + "mouse_right_left_64.png");
+        RRG = new Texture("green" + dirSlash + "mouse_right_right_64.png");
+        LSR = new Texture("red" + dirSlash + "mouse_left_red_still_64.png");
+        LLR = new Texture("red" + dirSlash + "mouse_left_red_left_64.png");
+        LRR = new Texture("red" + dirSlash + "mouse_left_red_right_64.png");
+        RSR = new Texture("red" + dirSlash + "mouse_right_red_still_64.png");
+        RLR = new Texture("red" + dirSlash + "mouse_right_red_left_64.png");
+        RRR = new Texture("red" + dirSlash + "mouse_right_red_right_64.png");
+        LSW = new Texture("white" + dirSlash + "mouse_left_white_still_64.png");
+        LLW = new Texture("white" + dirSlash + "mouse_left_white_left_64.png");
+        LRW = new Texture("white" + dirSlash + "mouse_left_white_right_64.png");
+        RSW = new Texture("white" + dirSlash + "mouse_right_white_still_64.png");
+        RLW = new Texture("white" + dirSlash + "mouse_right_white_left_64.png");
+        RRW = new Texture("white" + dirSlash + "mouse_right_white_right_64.png");
+        ALLDG = new Texture("animation" + dirSlash + "green" + dirSlash + "left" + dirSlash + "left_left-down_64.png");
+        ALLUG = new Texture("animation" + dirSlash + "green" + dirSlash + "left" + dirSlash + "left_left-up_64.png");
+        ARRDG = new Texture("animation" + dirSlash + "green" + dirSlash + "right" + dirSlash + "right_right-down_64.png");
+        ARRUG = new Texture("animation" + dirSlash + "green" + dirSlash + "right" + dirSlash + "right_right-up_64.png");
+        AUG = new Texture("animation" + dirSlash + "green" + dirSlash + "up_64.png");
+        ALLDR = new Texture("animation" + dirSlash + "red" + dirSlash + "left" + dirSlash + "left_left-down_64.png");
+        ALLUR = new Texture("animation" + dirSlash + "red" + dirSlash + "left" + dirSlash + "left_left-up_64.png");
+        ARRDR = new Texture("animation" + dirSlash + "red" + dirSlash + "right" + dirSlash + "right_right-down_64.png");
+        ARRUR = new Texture("animation" + dirSlash + "red" + dirSlash + "right" + dirSlash + "right_right-up_64.png");
+        AUR = new Texture("animation" + dirSlash + "red" + dirSlash + "up_64.png");
+        ALLDW = new Texture("animation" + dirSlash + "white" + dirSlash + "left" + dirSlash + "left_left-down_64.png");
+        ALLUW = new Texture("animation" + dirSlash + "white" + dirSlash + "left" + dirSlash + "left_left-up_64.png");
+        ARRDW = new Texture("animation" + dirSlash + "white" + dirSlash + "right" + dirSlash + "right_right-down_64.png");
+        ARRUW = new Texture("animation" + dirSlash + "white" + dirSlash + "right" + dirSlash + "right_right-up_64.png");
+        AUW = new Texture("animation" + dirSlash + "white" + dirSlash + "up_64.png");
 
         state = 0;
         memory = new char[2];

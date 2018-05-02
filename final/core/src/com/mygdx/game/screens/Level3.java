@@ -151,12 +151,13 @@ public class Level3 implements Screen {
     private int NPCHealth;
 
     private ChatBot chatBot;
+    private String dirSlash;
 
-    public Level3(Alex241Intro game, ChatBot chatBot) throws FileNotFoundException {
+    public Level3(Alex241Intro game, ChatBot chatBot, String dirSlash) throws FileNotFoundException {
         this.game = game;
+        this.dirSlash = dirSlash;
         this.chatBot = chatBot;
         this.chatBot.setLevel(3);
-
         //create camera
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,(Gdx.graphics.getWidth())/PIXELS_IN_METER, Gdx.graphics.getHeight()/PIXELS_IN_METER);
@@ -231,7 +232,7 @@ public class Level3 implements Screen {
         textureRegions = new TextureRegion[82];
         for (int i = 0; i < 82; i++) {
             String formatted = String.format("%02d", i);
-            this.textureRegions[i] = new TextureRegion(new Texture("final_background_portal\\frame_" + formatted + "_delay-0.05s.png"));
+            this.textureRegions[i] = new TextureRegion(new Texture("final_background_portal" + dirSlash + "frame_" + formatted + "_delay-0.05s.png"));
         }
         BACK_PORTAL_W = textureRegions[0].getRegionWidth();
         BACK_PORTAL_H = textureRegions[0].getRegionHeight();
@@ -239,7 +240,7 @@ public class Level3 implements Screen {
         animation.setPlayMode(Animation.PlayMode.LOOP);
 
         //create entities
-        player = new PC(this.game, X, Y, world);
+        player = new PC(this.game, X, Y, world, dirSlash);
         portal = new Portal(this.game, Gdx.graphics.getWidth() - (16), Y+16*8);
         binaryTreeBot = new BinaryTreeBot(this.game, world);
         creature = new Creature(this.game, new Vector2(INITIAL_CREATURE_X, INITIAL_CREATURE_y));
@@ -325,7 +326,7 @@ public class Level3 implements Screen {
                 theme.stop();
                 theme.dispose();
                 this.dispose();
-                game.setScreen(new GameOverScreen(game, chatBot));
+                game.setScreen(new GameOverScreen(game, chatBot, dirSlash));
             }
         }
 
@@ -629,7 +630,7 @@ public class Level3 implements Screen {
                     theme.stop();
                     theme.dispose();
                     this.dispose();
-                    game.setScreen(new GameWonScreen(game));
+                    game.setScreen(new GameWonScreen(game, dirSlash));
                 } else {
                     if (playAnimationOnceFlag) {
                         if (theme.isPlaying()) {

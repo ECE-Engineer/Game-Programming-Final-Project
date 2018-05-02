@@ -26,12 +26,14 @@ public class GameOverScreen implements Screen {
     private Texture background;
     private Music theme;
     private ChatBot chatBot;
+    private String dirSlash;
 
-    public GameOverScreen(Alex241Intro game, ChatBot chatBot) {
+    public GameOverScreen(Alex241Intro game, ChatBot chatBot, String dirSlash) {
         this.game = game;
+        this.dirSlash = dirSlash;
         this.chatBot = chatBot;
 
-        scoreFont = new BitmapFont(Gdx.files.internal("fonts\\score.fnt"));
+        scoreFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score.fnt"));
         this.background = new Texture("rubber_duck.png");
 
         this.theme = Gdx.audio.newMusic(Gdx.files.internal("game_over.mp3"));
@@ -76,7 +78,7 @@ public class GameOverScreen implements Screen {
                 game.batch.end();
                 try {
                     chatBot.stopAudio();
-                    game.setScreen(new Level1(game));
+                    game.setScreen(new Level1(game, dirSlash));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +92,7 @@ public class GameOverScreen implements Screen {
                 this.dispose();
                 game.batch.end();
                 chatBot.stopAudio();
-                game.setScreen(new MainMenuScreen(game));
+                game.setScreen(new MainMenuScreen(game, dirSlash));
                 return;
             }
         }

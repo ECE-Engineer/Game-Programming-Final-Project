@@ -12,6 +12,11 @@ public class Alex241Intro extends Game {
 	public final int WIDTH = 1800;
 	public final int HEIGHT = 1000;
 	public boolean IS_MOBILE = false;
+	private String dirSlash;
+
+	public Alex241Intro(String dirSlash) {
+		this.dirSlash = dirSlash;
+	}
 
 	@Override
 	public void create () {
@@ -21,7 +26,7 @@ public class Alex241Intro extends Game {
 			IS_MOBILE = true;
 		}
 
-		this.setScreen(new MainMenuScreen(this));//(new ReadyEEGTestScreen(this));//
+		this.setScreen(new MainMenuScreen(this, dirSlash));//(new ReadyEEGTestScreen(this));//
 
 //		img = new Texture("badlogic.jpg");
 	}

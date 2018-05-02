@@ -11,6 +11,7 @@ public class DesktopLauncher {
 		config.width = 1800;
 		config.height = 1000;
 		config.resizable = false;
-		new LwjglApplication(new Alex241Intro(), config);
+		String dirSlash = ((System.getProperty("os.name").toLowerCase()).contains("win")) ? "\\" : "/";
+		new LwjglApplication(new Alex241Intro(dirSlash), config);
 	}
 }

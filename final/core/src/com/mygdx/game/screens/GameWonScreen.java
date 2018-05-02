@@ -19,30 +19,30 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameWonScreen implements Screen {
-    private final Texture AIR_G = new Texture("animation\\green\\up_64.png");
-    private final Texture AIR_R = new Texture("animation\\red\\up_64.png");
-    private final Texture AIR_W = new Texture("animation\\white\\up_64.png");
+    private final Texture AIR_G;
+    private final Texture AIR_R;
+    private final Texture AIR_W;
 
-    private final Texture LSG = new Texture("green\\mouse_left_still_64.png");
-    private final Texture LLG = new Texture("green\\mouse_left_left_64.png");
-    private final Texture LRG = new Texture("green\\mouse_left_right_64.png");
-    private final Texture RSG = new Texture("green\\mouse_right_still_64.png");
-    private final Texture RLG = new Texture("green\\mouse_right_left_64.png");
-    private final Texture RRG = new Texture("green\\mouse_right_right_64.png");
+    private final Texture LSG;
+    private final Texture LLG;
+    private final Texture LRG;
+    private final Texture RSG;
+    private final Texture RLG;
+    private final Texture RRG;
 
-    private final Texture LSR = new Texture("red\\mouse_left_red_still_64.png");
-    private final Texture LLR = new Texture("red\\mouse_left_red_left_64.png");
-    private final Texture LRR = new Texture("red\\mouse_left_red_right_64.png");
-    private final Texture RSR = new Texture("red\\mouse_right_red_still_64.png");
-    private final Texture RLR = new Texture("red\\mouse_right_red_left_64.png");
-    private final Texture RRR = new Texture("red\\mouse_right_red_right_64.png");
+    private final Texture LSR;
+    private final Texture LLR;
+    private final Texture LRR;
+    private final Texture RSR;
+    private final Texture RLR;
+    private final Texture RRR;
 
-    private final Texture LSW = new Texture("white\\mouse_left_white_still_64.png");
-    private final Texture LLW = new Texture("white\\mouse_left_white_left_64.png");
-    private final Texture LRW = new Texture("white\\mouse_left_white_right_64.png");
-    private final Texture RSW = new Texture("white\\mouse_right_white_still_64.png");
-    private final Texture RLW = new Texture("white\\mouse_right_white_left_64.png");
-    private final Texture RRW = new Texture("white\\mouse_right_white_right_64.png");
+    private final Texture LSW;
+    private final Texture LLW;
+    private final Texture LRW;
+    private final Texture RSW;
+    private final Texture RLW;
+    private final Texture RRW;
 
     private float START_GREEN;
     private float START_RED;
@@ -90,16 +90,38 @@ public class GameWonScreen implements Screen {
 
     private Music theme2;
     private boolean playtheme2Once = true;
+    private String dirSlash;
 
-    public GameWonScreen(Alex241Intro game) {
+    public GameWonScreen(Alex241Intro game, String dirSlash) {
         this.game = game;
+        this.dirSlash = dirSlash;
         world = new World(new Vector2(0f,-9.81f), true);
         playFlag = false;
         theme = Gdx.audio.newMusic(Gdx.files.internal("Bulgarian-National-Anthem-Mila-Rodino.mp3"));
         theme2 = Gdx.audio.newMusic(Gdx.files.internal("game_complete.mp3"));
-        scoreFont = new BitmapFont(Gdx.files.internal("fonts\\score2.fnt"));
+        scoreFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score2.fnt"));
         background = new Texture("level_1.png");
-
+        AIR_G = new Texture("animation" + dirSlash + "green" + dirSlash + "up_64.png");
+        AIR_R = new Texture("animation" + dirSlash + "red" + dirSlash + "up_64.png");
+        AIR_W = new Texture("animation" + dirSlash + "white" + dirSlash + "up_64.png");
+        LSG = new Texture("green" + dirSlash + "mouse_left_still_64.png");
+        LLG = new Texture("green" + dirSlash + "mouse_left_left_64.png");
+        LRG = new Texture("green" + dirSlash + "mouse_left_right_64.png");
+        RSG = new Texture("green" + dirSlash + "mouse_right_still_64.png");
+        RLG = new Texture("green" + dirSlash + "mouse_right_left_64.png");
+        RRG = new Texture("green" + dirSlash + "mouse_right_right_64.png");
+        LSR = new Texture("red" + dirSlash + "mouse_left_red_still_64.png");
+        LLR = new Texture("red" + dirSlash + "mouse_left_red_left_64.png");
+        LRR = new Texture("red" + dirSlash + "mouse_left_red_right_64.png");
+        RSR = new Texture("red" + dirSlash + "mouse_right_red_still_64.png");
+        RLR = new Texture("red" + dirSlash + "mouse_right_red_left_64.png");
+        RRR = new Texture("red" + dirSlash + "mouse_right_red_right_64.png");
+        LSW = new Texture("white" + dirSlash + "mouse_left_white_still_64.png");
+        LLW = new Texture("white" + dirSlash + "mouse_left_white_left_64.png");
+        LRW = new Texture("white" + dirSlash + "mouse_left_white_right_64.png");
+        RSW = new Texture("white" + dirSlash + "mouse_right_white_still_64.png");
+        RLW = new Texture("white" + dirSlash + "mouse_right_white_left_64.png");
+        RRW = new Texture("white" + dirSlash + "mouse_right_white_right_64.png");
 
         //look right
         this.LOOK_RED = false;
@@ -413,7 +435,7 @@ public class GameWonScreen implements Screen {
             if (touchX > mainMenuX && touchX < mainMenuX + mainMenuLayout.width && touchY > mainMenuY - mainMenuLayout.height && touchY < mainMenuY) {
                 this.dispose();
                 game.batch.end();
-                game.setScreen(new MainMenuScreen(game));
+                game.setScreen(new MainMenuScreen(game, dirSlash));
                 return;
             }
         }
@@ -422,7 +444,7 @@ public class GameWonScreen implements Screen {
             if (touchX > creditsX && touchX < creditsX + creditsLayout.width && touchY > creditsY - creditsLayout.height && touchY < creditsY) {
                 this.dispose();
                 game.batch.end();
-                game.setScreen(new CreditScreen(game));
+                game.setScreen(new CreditScreen(game, dirSlash));
                 return;
             }
         }

@@ -97,10 +97,14 @@ public class Level1 implements Screen {
     private boolean stopPlayingMusic;
 
     private ChatBot chatBot;
+    private String dirSlash;
 
 
-    public Level1(Alex241Intro game) throws FileNotFoundException {
+    public Level1(Alex241Intro game, String dirSlash) throws FileNotFoundException {
         this.game = game;
+        this.dirSlash = dirSlash;
+
+
         //create camera
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,(Gdx.graphics.getWidth())/PIXELS_IN_METER, Gdx.graphics.getHeight()/PIXELS_IN_METER);
@@ -162,14 +166,14 @@ public class Level1 implements Screen {
         textureRegions = new TextureRegion[240];
         for (int i = 0; i < 240; i++) {
             String formatted = String.format("%03d", i);
-            this.textureRegions[i] = new TextureRegion(new Texture("level_1\\frame_" + formatted + "_delay-0.03s.png"));
+            this.textureRegions[i] = new TextureRegion(new Texture("level_1" + dirSlash + "frame_" + formatted + "_delay-0.03s.png"));
         }
         animation = new Animation<TextureRegion>(0.03f, textureRegions);
         animation.setPlayMode(Animation.PlayMode.LOOP);
 
-        this.gridNumberFont = new BitmapFont(Gdx.files.internal("fonts\\score2.fnt"));
+        this.gridNumberFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score2.fnt"));
 
-        player = new PC(this.game, X, Y, world);
+        player = new PC(this.game, X, Y, world, dirSlash);
         nullBot = new NullBot(this.game, this.gridNumberFont, world);
         portal = new Portal(this.game, Gdx.graphics.getWidth() - (16), Y);
 
@@ -218,7 +222,7 @@ public class Level1 implements Screen {
             theme.stop();
             theme.dispose();
             this.dispose();
-            game.setScreen(new GameOverScreen(game, chatBot));
+            game.setScreen(new GameOverScreen(game, chatBot, dirSlash));
         }
     }
 
@@ -305,7 +309,7 @@ public class Level1 implements Screen {
                     theme.dispose();
                     this.dispose();
                     try {
-                        game.setScreen(new Level2(game, chatBot));
+                        game.setScreen(new Level2(game, chatBot, dirSlash));
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }

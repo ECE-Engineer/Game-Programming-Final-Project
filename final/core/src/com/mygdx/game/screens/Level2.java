@@ -98,9 +98,11 @@ public class Level2 implements Screen {
     
     private int worldExceptionCounter;
     private ChatBot chatBot;
+    private String dirSlash;
 
-    public Level2(Alex241Intro game, ChatBot chatBot) throws FileNotFoundException {
+    public Level2(Alex241Intro game, ChatBot chatBot, String dirSlash) throws FileNotFoundException {
         this.game = game;
+        this.dirSlash = dirSlash;
         this.chatBot = chatBot;
         this.chatBot.setLevel(2);
 
@@ -186,13 +188,13 @@ public class Level2 implements Screen {
         //create animation for portal
         textureRegions = new TextureRegion[9];
         for (int i = 0; i < 9; i++) {
-            this.textureRegions[i] = new TextureRegion(new Texture("level2_portal\\frame_" + i + "_delay-0.1s.png"));
+            this.textureRegions[i] = new TextureRegion(new Texture("level2_portal" + dirSlash + "frame_" + i + "_delay-0.1s.png"));
         }
         animation = new Animation<TextureRegion>(0.1f, textureRegions);
         animation.setPlayMode(Animation.PlayMode.LOOP);
 
         //create entities
-        player = new PC(this.game, X, Y, world);
+        player = new PC(this.game, X, Y, world, dirSlash);
         xmlBot = new XMLBot(this.game, this.world);
         portal = new Portal(this.game, Gdx.graphics.getWidth() - (32+16), Y);
         exception = new Exceptions(game, EXCEPTION_START_X, EXCEPTION_START_Y, 32);
@@ -250,7 +252,7 @@ public class Level2 implements Screen {
                 theme.stop();
                 theme.dispose();
                 this.dispose();
-                game.setScreen(new GameOverScreen(game, chatBot));
+                game.setScreen(new GameOverScreen(game, chatBot, dirSlash));
             }
         }
 
@@ -325,7 +327,7 @@ public class Level2 implements Screen {
                     theme.dispose();
                     this.dispose();
                     try {
-                        game.setScreen(new Level3(game, chatBot));
+                        game.setScreen(new Level3(game, chatBot, dirSlash));
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }

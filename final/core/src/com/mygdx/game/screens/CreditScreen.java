@@ -34,20 +34,22 @@ public class CreditScreen implements Screen {
     GlyphLayout[] allText = new GlyphLayout[19];
     GridPosition[] positions = new GridPosition[19];
     private Music theme;
+    private String dirSlash;
 
-    public CreditScreen(Alex241Intro game) {
+    public CreditScreen(Alex241Intro game, String dirSlash) {
         this.game = game;
+        this.dirSlash = dirSlash;
         world = new World(new Vector2(0f,-9.81f), true);
-        scoreFont = new BitmapFont(Gdx.files.internal("fonts\\score.fnt"));
-        specialFont = new BitmapFont(Gdx.files.internal("fonts\\score2.fnt"));
-        tex1 = new TextureRegion(new Texture("frames\\0.gif"));
-        tex2 = new TextureRegion(new Texture("frames\\1.gif"));
-        tex3 = new TextureRegion(new Texture("frames\\2.gif"));
-        tex4 = new TextureRegion(new Texture("frames\\3.gif"));
-        tex5 = new TextureRegion(new Texture("frames\\4.gif"));
-        tex6 = new TextureRegion(new Texture("frames\\5.gif"));
-        tex7 = new TextureRegion(new Texture("frames\\6.gif"));
-        tex8 = new TextureRegion(new Texture("frames\\7.gif"));
+        scoreFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score.fnt"));
+        specialFont = new BitmapFont(Gdx.files.internal("fonts" + dirSlash + "score2.fnt"));
+        tex1 = new TextureRegion(new Texture("frames" + dirSlash + "0.gif"));
+        tex2 = new TextureRegion(new Texture("frames" + dirSlash + "1.gif"));
+        tex3 = new TextureRegion(new Texture("frames" + dirSlash + "2.gif"));
+        tex4 = new TextureRegion(new Texture("frames" + dirSlash + "3.gif"));
+        tex5 = new TextureRegion(new Texture("frames" + dirSlash + "4.gif"));
+        tex6 = new TextureRegion(new Texture("frames" + dirSlash + "5.gif"));
+        tex7 = new TextureRegion(new Texture("frames" + dirSlash + "6.gif"));
+        tex8 = new TextureRegion(new Texture("frames" + dirSlash + "7.gif"));
         animation = new Animation<TextureRegion>(0.1f, tex1, tex2, tex3, tex4, tex5, tex6, tex7, tex8);
         animation.setPlayMode(Animation.PlayMode.LOOP);
         this.theme = Gdx.audio.newMusic(Gdx.files.internal("credits.mp3"));
@@ -130,7 +132,7 @@ public class CreditScreen implements Screen {
             if (touchX > mainMenuX && touchX < mainMenuX + mainMenuLayout.width && touchY > mainMenuY - mainMenuLayout.height && touchY < mainMenuY) {
                 this.dispose();
                 game.batch.end();
-                game.setScreen(new MainMenuScreen(game));
+                game.setScreen(new MainMenuScreen(game, dirSlash));
                 return;
             }
         }
@@ -146,7 +148,7 @@ public class CreditScreen implements Screen {
     private void update() {
         if (positions[18].getY() > Gdx.graphics.getHeight() + allText[18].height) {
             this.dispose();
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new MainMenuScreen(game, dirSlash));
         } else {
             for (int i = 0; i < positions.length; i++) {
                 positions[i].setY(positions[i].getY() + 1);
